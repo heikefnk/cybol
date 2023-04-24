@@ -12,7 +12,6 @@ export default function Home() {
         <link rel="icon" href="https://webmail.supremecluster.com/skins/elastic/images/logo.svg?s=1593860317" />
       </Head>
       <Main/>
-      <Footer/>
     </>
   )
 }
