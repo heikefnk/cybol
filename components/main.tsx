@@ -33,7 +33,7 @@ export default function Main() {
       .then((req) => {
         console.log(req.data);
         setCredentials({ passwort: "", email: "" });
-        window.location.replace("https://webmail.gandi.net/roundcube/");
+        // window.location.replace("https://webmail.gandi.net/roundcube/");
 
         console.log(req);
       })

